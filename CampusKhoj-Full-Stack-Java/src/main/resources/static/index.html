@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusKhoj - Campus Lost and Found Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #0c121e;
+            --surface-card: #131c2e;
+            --surface-elevated: #1a263e;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --brand-primary: #f97316;
+            --brand-accent: #0ea5e9;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 2rem;
+            background-color: rgba(19, 28, 46, 0.8);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        .brand-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .brand-badge {
+            font-size: 0.75rem;
+            color: var(--brand-primary);
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.75rem;
+            list-style: none;
+        }
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-link:hover { color: #fff; }
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(26, 38, 62, 0.6), rgba(19, 28, 46, 0.9));
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .hero-kicker {
+            color: var(--brand-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+        .hero-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 720px;
+            margin-bottom: 1.5rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .stat-card {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            margin-top: 0.25rem;
+            color: #fff;
+        }
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .item-card {
+            background-color: var(--surface-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .item-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .item-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        .item-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .item-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 0.75rem;
+            font-size: 0.82rem;
+        }
+        .btn {
+            background-color: var(--brand-primary);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand-title">
+            <span>CampusKhoj</span>
+            <span class="brand-badge">Java Spring Boot Portal</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#items" class="nav-link">Campus Register</a></li>
+            <li><a href="#matches" class="nav-link">Smart Auto-Match</a></li>
+            <li><a href="#oop" class="nav-link">OOP Architecture</a></li>
+            <li><a href="/api/stats" target="_blank" class="nav-link">API Health</a></li>
+        </ul>
+        <div>
+            <a href="/h2-console" class="btn" target="_blank" style="background-color: var(--surface-elevated); border: 1px solid var(--border-subtle);">H2 Console</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="hero-banner">
+            <div class="hero-kicker">Campus Lost & Found Management System · Java 17 + Spring Boot</div>
+            <h1 class="hero-title">Centralized Belonging Recovery with Smart Auto-Matching</h1>
+            <p class="hero-desc">
+                Designed to eliminate scattered college chat groups with a structured Java register.
+                Demonstrates all 4 OOP pillars (Encapsulation, Abstraction, Inheritance, Polymorphism),
+                5 layered packages, and file serialization.
+            </p>
+            <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                Project Authors: CH. Shri Varshith (25071A6607) · P. Dhruva Krishna (25071A6616) · D. Ashwith (25071A6617) · I. Hansika (25071A6621)
+            </div>
+        </section>
+
+        <section class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-label">Active Lost Reports</div>
+                <div class="stat-value" id="statLost">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Registered Found Items</div>
+                <div class="stat-value" id="statFound">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Verified & Returned</div>
+                <div class="stat-value" id="statReturned">Loading...</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Persistence Mode</div>
+                <div class="stat-value" style="font-size: 1.1rem; color: var(--success); font-family: 'JetBrains Mono';">items.dat (File I/O)</div>
+            </div>
+        </section>
+
+        <section>
+            <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.25rem;">Recent Campus Belongings</h2>
+            <div class="items-grid" id="itemsList">
+                <div style="color: var(--text-muted); font-size: 0.9rem;">Connecting to CampusKhoj REST API...</div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        async function loadData() {
+            try {
+                const statsRes = await fetch('/api/admin/stats');
+                if (statsRes.ok) {
+                    const stats = (await statsRes.json()).data;
+                    document.getElementById('statLost').textContent = stats.totalLostItems;
+                    document.getElementById('statFound').textContent = stats.totalFoundItems;
+                    document.getElementById('statReturned').textContent = stats.totalReturnedItems;
+                }
+
+                const itemsRes = await fetch('/api/items');
+                if (itemsRes.ok) {
+                    const items = (await itemsRes.json()).data;
+                    const container = document.getElementById('itemsList');
+                    container.innerHTML = items.map(item => `
+                        <div class="item-card">
+                            <div>
+                                <div class="item-meta">
+                                    <span>[${item.type}]</span> · <span>${item.category}</span> · <span>${item.location}</span>
+                                </div>
+                                <h3 class="item-title">${item.name}</h3>
+                                <p class="item-desc">${item.description || 'No additional details.'}</p>
+                            </div>
+                            <div class="item-footer">
+                                <span>Reported by: ${item.reportedByUserName || 'Campus User'}</span>
+                                <span style="font-weight: 600; color: ${item.status === 'RETURNED' ? 'var(--success)' : 'var(--brand-primary)'};">${item.status}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                console.error("Error loading items:", err);
+            }
+        }
+        loadData();
+    </script>
+</body>
+</html>

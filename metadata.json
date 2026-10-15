@@ -1,0 +1,6 @@
+{
+  "name": "CampusKhoj - Campus Lost & Found Management System",
+  "description": "A secure, college-submission-ready Campus Lost and Found Management System with smart auto-matching, role-based access for Students, Staff, and Admins, claim verification workflow, and Java OOP architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
